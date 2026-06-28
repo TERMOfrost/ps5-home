@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha IA</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#212121;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.chat{
+    width:100%;
+    max-width:900px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.topo{
+    background:#171717;
+    padding:18px;
+    font-size:22px;
+    text-align:center;
+    border-bottom:1px solid #333;
+}
+
+#mensagens{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.user{
+    background:#2d2d2d;
+    padding:12px;
+    border-radius:10px;
+    margin:10px 0;
+    text-align:right;
+}
+
+.ia{
+    background:#171717;
+    padding:12px;
+    border-radius:10px;
+    margin:10px 0;
+}
+
+.barra{
+    display:flex;
+    padding:15px;
+    background:#171717;
+}
+
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    background:#2d2d2d;
+    color:white;
+}
+
+button{
+    margin-left:10px;
+    padding:15px 25px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#10a37f;
+    color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="chat">
+
+<div class="topo">
+Minha IA
+</div>
+
+<div id="mensagens">
+
+<div class="ia">
+Olá! Fui criada por você.
+</div>
+
+</div>
+
+<div class="barra">
+<input id="texto" placeholder="Pergunte qualquer coisa...">
+<button onclick="enviar()">Enviar</button>
+</div>
+
+</div>
+
+<script>
+
+// ========= BASE DE CONHECIMENTO =========
+// ENSINE SUA IA AQUI
+
+const conhecimento = {
+
+"oi":"Olá! Como posso ajudar?",
+
+"quem criou você":"Fui criada pelo meu desenvolvedor.",
+
+"qual seu nome":"Meu nome é Minha IA.",
+
+"html":"HTML serve para criar páginas web.",
+
+"css":"CSS é responsável pelo visual do site."
+
+};
+
+// =======================================
+
+function enviar(){
+
+let texto=document.getElementById("texto").value.toLowerCase();
+
+if(texto=="") return;
+
+let chat=document.getElementById("mensagens");
+
+chat.innerHTML+=`
+<div class="user">${texto}</div>
+`;
+
+let resposta=conhecimento[texto];
+
+if(!resposta)
+resposta="Ainda não fui ensinada sobre isso.";
+
+chat.innerHTML+=`
+<div class="ia">${resposta}</div>
+`;
+
+document.getElementById("texto").value="";
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>
